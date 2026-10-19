@@ -1,0 +1,12 @@
+# Eclipse compiled files
+build/
+bin/
+.classpath
+.project
+.settings/
+
+# Server files
+Servers/
+
+# Mac OS files
+.DS_Store

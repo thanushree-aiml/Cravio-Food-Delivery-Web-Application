@@ -1,0 +1,407 @@
+/* =========================
+   GOOGLE FONTS & RESET
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* =========================
+   THEME VARIABLES (Light / Dark)
+========================= */
+:root {
+    --bg-color: #f7f8fa;
+    --text-color: #1c1c1c;
+    --text-muted: #6c757d;
+    --card-bg: #ffffff;
+    --primary: #e23744; /* Premium Red */
+    --primary-hover: #c92d39;
+    --shadow: 0 8px 24px rgba(0,0,0,0.06);
+    --border: #eaeaea;
+    --input-bg: #ffffff;
+    --success: #1ba672;
+}
+
+body.dark {
+    --bg-color: #121212;
+    --text-color: #f5f5f5;
+    --text-muted: #a0a0a0;
+    --card-bg: #1e1e1e;
+    --primary: #ff4d4d;
+    --primary-hover: #e63939;
+    --shadow: 0 8px 24px rgba(0,0,0,0.4);
+    --border: #333333;
+    --input-bg: #2a2a2a;
+    --success: #27ae60;
+}
+
+/* =========================
+   GLOBAL STYLES
+========================= */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+}
+
+a { 
+    text-decoration: none; 
+    color: inherit; 
+}
+
+/* =========================
+   NAVBAR & SEARCH
+========================= */
+.custom-navbar {
+    background: var(--card-bg);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 12px 0;
+    transition: background 0.3s ease;
+}
+
+.navbar-brand {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary) !important;
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    color: var(--text-color) !important;
+    font-weight: 500;
+    margin: 0 8px;
+    transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+.nav-search-form {
+    flex-grow: 1;
+    max-width: 400px;
+    margin: 0 20px;
+}
+
+.nav-search-input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.nav-search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.location-picker {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn-primary-custom {
+    background-color: var(--primary);
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+    background-color: var(--primary-hover);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(226, 55, 68, 0.3);
+}
+
+.btn-outline-custom {
+    border: 2px solid var(--border);
+    color: var(--text-color);
+    border-radius: 10px;
+    font-weight: 600;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-custom:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--bg-color);
+}
+
+/* =========================
+   LANDING PAGE (HERO & CATEGORIES)
+========================= */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80') center/cover no-repeat;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+    border-radius: 20px;
+    margin: 20px auto;
+    width: 95%;
+    max-width: 1400px;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #f0f0f0;
+}
+
+.hero-search-box {
+    background: white;
+    padding: 8px;
+    border-radius: 12px;
+    display: flex;
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.hero-search-box input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+.hero-search-box button {
+    border: none;
+    background: var(--primary);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.hero-search-box button:hover {
+    background: var(--primary-hover);
+}
+
+.category-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+    padding: 20px 0;
+    scrollbar-width: none;
+}
+
+.category-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.category-item {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.category-item:hover {
+    transform: scale(1.05);
+}
+
+.category-img-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+}
+
+.category-item h6 {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* =========================
+   CARDS & CONTAINERS
+========================= */
+.custom-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+.card-body-custom {
+    padding: 20px;
+}
+
+.price-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* =========================
+   VEG / NON-VEG INDICATORS
+========================= */
+.diet-icon {
+    width: 16px;
+    height: 16px;
+    border: 2px solid;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    margin-right: 8px;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+.diet-icon.veg { border-color: var(--success); }
+.diet-icon.veg::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background-color: var(--success);
+    border-radius: 50%;
+}
+
+.diet-icon.non-veg { border-color: var(--primary); }
+.diet-icon.non-veg::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+}
+
+/* =========================
+   SWIGGY STYLE ADD BUTTON
+========================= */
+.clean-add-btn {
+    width: 100%;
+    background-color: #ffffff;
+    color: #1ba672; /* Swiggy Green */
+    border: 1px solid #d4d5d9;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 800;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.clean-add-btn:hover {
+    background-color: #f8f8f8;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: #1ba672;
+}
+
+/* =========================
+   SWIGGY STYLE QUANTITY CONTROLS
+========================= */
+.swiggy-qty-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #d4d5d9;
+    border-radius: 8px;
+    padding: 5px 10px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.swiggy-btn {
+    background: transparent;
+    border: none;
+    color: #1ba672;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiggy-qty-text {
+    color: #1ba672;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+/* =========================
+   TOAST NOTIFICATION
+========================= */
+.toast-container {
+    animation: slideUp 0.4s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.toast {
+    border-radius: 8px;
+}
+
+/* =========================
+   FORMS & AUTH CARDS
+========================= */
+.auth-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 40px;
+}
+
+.form-control-custom {
+    background: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control-custom:focus {
+    background: var(--input-bg);
+    color: var(--text-color);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(226, 55, 68, 0.2);
+    outline: none;
+}
