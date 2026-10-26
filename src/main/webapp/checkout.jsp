@@ -78,6 +78,71 @@
     </div>
 </div>
 
+<!-- Add this script in the <head> of checkout.jsp -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<!-- ... (Your existing checkout form) ... -->
+<!-- Change your "Place Order" button to call the Razorpay function -->
+<button type="button" id="rzp-button" class="btn btn-primary-custom w-100 py-3 fs-5">Pay with Razorpay</button>
+
+<!-- Hidden form to submit payment details for verification -->
+<form id="paymentForm" action="verifyPayment" method="post" style="display:none;">
+    <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+    <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
+    <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+</form>
+
+<script>
+document.getElementById('rzp-button').onclick = function(e){
+    e.preventDefault();
+    
+    // 1. Call your backend to create the Razorpay Order
+    fetch('createPaymentOrder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'amount=' + document.getElementById('totalAmount').value // Ensure you have this hidden input
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert("Error creating order. Please try again.");
+            return;
+        }
+
+        // 2. Configure Razorpay Checkout
+        var options = {
+            "key": "<%= com.tap.util.RazorpayConfig.KEY_ID %>", // Your Key ID
+            "amount": document.getElementById('totalAmount').value * 100, // Amount in paise
+            "currency": "INR",
+            "name": "CRAVIO",
+            "description": "Food Delivery Order",
+            "order_id": data.orderId, // The order ID from your backend
+            "handler": function (response){
+                // 3. On success, submit the details to your verification servlet
+                document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+                document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
+                document.getElementById('razorpay_signature').value = response.razorpay_signature;
+                document.getElementById('paymentForm').submit();
+            },
+            "prefill": {
+                "name": "<%= ((User)session.getAttribute("loggedInUser")).getUsername() %>",
+                "email": "<%= ((User)session.getAttribute("loggedInUser")).getEmail() %>",
+                "contact": "<%= ((User)session.getAttribute("loggedInUser")).getPhone() %>"
+            },
+            "theme": {
+                "color": "#e23744" // CRAVIO Red
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Something went wrong. Please check your connection.");
+    });
+};
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
